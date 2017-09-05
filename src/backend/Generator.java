@@ -20,6 +20,9 @@ import javax.imageio.ImageIO;
 //Diamond & PEarl Promos end with DP##
 //HeartGold SoulSilver Promos end with HGSS##
 //Black & White Promos end with bw##
+//XY Promos end with XY##
+//Generations
+//SM Promos end with SM##
 
 
 //sets with ptcgo-1.png suffix
@@ -40,14 +43,18 @@ import javax.imageio.ImageIO;
 //PLF
 //PLB
 //LTR
+//KSS
+//XY
+//FLF
+//FFI
 
 //known issues: 
-//gym heroes images don't have the g1 abbreviation on them
-//gym challenge images don't have the g2 abbreviation on them
-//neo genesis images don't have the n1 abbreviation on them
-//neo discovery images don't have the n2 abbreviation on them
-//neo revelation images don't have the n3 abbreviation on them
-//neo destiny images don't have the n4 abbreviation on them
+//gym heroes images don't have the g1 abbreviation on them -- fixed
+//gym challenge images don't have the g2 abbreviation on them -- fixed
+//neo genesis images don't have the n1 abbreviation on them -- fixed
+//neo discovery images don't have the n2 abbreviation on them -- fixed
+//neo revelation images don't have the n3 abbreviation on them -- fixed
+//neo destiny images don't have the n4 abbreviation on them -- fixed
 //some delta species images have an added after the pokemon name and before the set name
 //possibly only cards that existed before this set? nah, golbat doesn't have d maybe all cards before azurill (20)
 //Dragon Frontier Delta Species cards have delta between the pokemon name and set name
@@ -63,7 +70,17 @@ import javax.imageio.ImageIO;
 //Exp. share in NXD
 //Exp. share in DRV
 //Mr. Mime in PLF
-
+//BREAK cards are rotated and don't show up on the card page. have -rotated.jpg as well (XY Promo, BREAKthrough, BREAKpoint, Fates Collide, Steam Siege (with no suffix), Evolutions (with horizontal.jpg suffix
+//FFI secret rares are listed as rare holos?
+//Mr. Mime in Jungle
+//PCR/PCL suffix conflict in Primal Clash
+//Mr. Mime in Primal Clash
+//Trainer's Mail 92a in Roaring Skies has a bad picture
+//fates collide suffix is fco on page and fcl on image
+//Mr. Mime in Fates Collide
+//sun and moon promo images don't have the set "sun-moon-promos-", just "promo-" Wait, sun and moon promos are just all over the place and inconsistent gross. 
+//sun and moon images don't ahev their sum abbreviation
+//sun and moon energies are weird? psychic has a gold nameplate and is secret rare, the rest don't have numbers? secret rare energies with gold nameplates in other sets
 //guardians rising images don't have the gri abbreviation in their file names
 //Victory Medals 
 //x+y images have a ptcgo abbreviation in their file name
