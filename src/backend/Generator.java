@@ -49,16 +49,21 @@ import javax.imageio.ImageIO;
 //FFI
 
 //known issues: 
+//Mr. Mime, Mr. Fuji, Mr. Briney, Mr. Stone don't have the period in the card url but do in the image url --fixed
 //gym heroes images don't have the g1 abbreviation on them -- fixed
 //gym challenge images don't have the g2 abbreviation on them -- fixed
 //neo genesis images don't have the n1 abbreviation on them -- fixed
 //neo discovery images don't have the n2 abbreviation on them -- fixed
 //neo revelation images don't have the n3 abbreviation on them -- fixed
 //neo destiny images don't have the n4 abbreviation on them -- fixed
-//some delta species images have an added after the pokemon name and before the set name
-//possibly only cards that existed before this set? nah, golbat doesn't have d maybe all cards before azurill (20)
-//Dragon Frontier Delta Species cards have delta between the pokemon name and set name
-//I think all the dragon frontier pokemon cards are delta species
+//some delta species images have an added adjective after the pokemon name and before the set name (starts with EX Delta Species) --fixed
+//see: https://bulbapedia.bulbagarden.net/wiki/%CE%94_Delta_Species_(TCG)
+//EX Delta Species has -d-
+//EX Holon Phantoms uses -delta-
+//EX Crystal Guardians uses -delta-
+//pop series uses -delta-
+//EX Dragon Frontiers uses -delta-
+//EX delta species still have -delta-, but Star delta do not
 //Lv.X cards have lv-x on card page and lv.x on image in DPPromos, DP, MT, SW, GE, MD, LA, SF, PL, RR, SV, AR, 
 //Trainer cards with + in SF don't have + in page but have + in image
 //World Collection has language on image but number on page
@@ -97,7 +102,7 @@ public class Generator {
 		//Set up array of URLs 
 		String line = null;
 		try (
-				InputStream is = Generator.class.getResourceAsStream("/res/cards/cards.txt");
+				InputStream is = Generator.class.getResourceAsStream("/res/cards/cardimages.txt");
 				InputStreamReader isr = new InputStreamReader(is);
 				BufferedReader ready = new BufferedReader(isr);
 				){
