@@ -3,13 +3,20 @@ package backend;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Random;
 import javax.imageio.ImageIO;
+import static java.nio.file.StandardOpenOption.*;
 
 //sets with no abbreviations:
 //Victory Medals
@@ -154,15 +161,60 @@ public class Generator {
 
 
 
-	public BufferedImage getCard() {
+	public BufferedImage getCard(int choice) {
 		try {
 			//load a card
-			BufferedImage cardy = ImageIO.read(urls[69]);
+			BufferedImage cardy = ImageIO.read(urls[choice]);
 			return cardy;
 		} catch (IOException e) {
-			System.out.println("Couldn't load image at "+urls[69]);
+			System.out.println("Couldn't load image at "+urls[choice]);
 		}
 		return null;
 	}
-
+	private void reportError() {
+		//Use JavaMail to email myself a error log?
+	}
+	public void test() {
+		HttpURLConnection test = null;
+		BufferedWriter writey = null;
+		Path pathy = Paths.get("src/res/cards/errors.txt");
+		try {
+			writey = new BufferedWriter(Files.newBufferedWriter(pathy, CREATE, APPEND));
+		} catch (IOException e1) {
+			System.out.println("Couldn't create BufferedWriter.");
+		}
+		for(/*URL card: urls*/int k = 0; k < 1; k++) {
+			try {
+				test = (HttpURLConnection) /*card*/urls[k].openConnection();
+			} catch (IOException e) {
+				System.out.println("Uhh");
+				e.printStackTrace();
+			}
+			try {
+				test.setRequestMethod("HEAD");
+			} catch (ProtocolException e) {
+				System.out.println("Broke at setting request method to GET.");
+				e.printStackTrace();
+			}
+			try {
+				test.connect();
+			} catch (IOException e) {
+				System.out.println("Failed to connect.");
+				e.printStackTrace();
+			}
+			try {
+				int responseCode = test.getResponseCode();
+				if(/*responseCode != 200*/true) {
+					System.out.println(responseCode);
+					writey.write(responseCode + " " + /*card*/urls[k]);
+					writey.newLine();
+					writey.flush();
+					writey.close();
+				}
+			} catch (IOException e) {
+				System.out.println("Couldn't get response code.");
+				e.printStackTrace();
+			}
+		}
+	}
 }

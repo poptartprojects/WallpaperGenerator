@@ -25,7 +25,7 @@ public class Main extends Application {
 	Generator generator = new Generator();
 	@Override
 	public void start(Stage primaryStage) {
-
+		generator.test();
 		BorderPane root = new BorderPane();
 		FileChooser fChoosey = new FileChooser();
 		fChoosey.getExtensionFilters().addAll(
