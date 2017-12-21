@@ -25,7 +25,7 @@ public class Main extends Application {
 	Generator generator = new Generator();
 	@Override
 	public void start(Stage primaryStage) {
-		generator.test();
+		//generator.test();
 		BorderPane root = new BorderPane();
 		FileChooser fChoosey = new FileChooser();
 		fChoosey.getExtensionFilters().addAll(
@@ -71,9 +71,19 @@ public class Main extends Application {
 			}
 
 		});
-
+		Button t = new Button();
+		t.setText("Test");
+		t.setOnAction(new EventHandler<ActionEvent>(){
+			@Override
+			public void handle(ActionEvent arg0) {
+				//Generate an image and show save button
+				//range: 0 to 9809
+				generator.test(0, 9809);
+			}
+		});
 
 		root.setLeft(g);
+		root.setCenter(t);
 		Scene prefs = new Scene(root,400,400);
 		prefs.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		primaryStage.setScene(prefs);
