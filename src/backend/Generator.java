@@ -18,7 +18,7 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 import static java.nio.file.StandardOpenOption.*;
 
-
+/*
 //Adding new cards:
 //1. Use Chrome to download all urls on a page to a txt file, copy and paste the new card pages to cards.txt
 //2. Copy the new card urls to filler.txt
@@ -392,7 +392,7 @@ import static java.nio.file.StandardOpenOption.*;
 ////////////////////////////////////////////////////////
 
 //HS introduced LEGEND 2 part cards that look sick and Alph Lithographs
-
+*/
 public class Generator {
 	BufferedImage template= null;
 	URL[] urls = new URL[10000];
@@ -407,8 +407,8 @@ public class Generator {
 				BufferedReader ready = new BufferedReader(isr);
 				){
 			while((line = ready.readLine()) != null) {
-					urls[numCards] = new URL(line);
-					numCards++;
+				urls[numCards] = new URL(line);
+				numCards++;
 			}
 		} catch (MalformedURLException e) {
 			System.out.println("Error creating a URL from String "+ line);
@@ -423,7 +423,8 @@ public class Generator {
 		}
 	}
 	public BufferedImage generate(int templatenum) {
-
+		//add threads?
+		
 		//load template
 		try { 
 			template = ImageIO.read(Generator.class.getResourceAsStream("/res/templates/template"+templatenum+".png"));
@@ -452,7 +453,9 @@ public class Generator {
 		return template;
 	}
 
-
+	public void drawCard(int cardNumber, Graphics2D wallpaper) {
+		
+	}
 
 	public BufferedImage getCard(int choice) {
 		try {
@@ -467,7 +470,7 @@ public class Generator {
 	private void reportError() {
 		//Use JavaMail to email myself a error log?
 	}
-	public void test(int start, int end) {
+	public void urlTest(int start, int end) {
 		//Note: Card url n in the array corresponds to line n+1 in the .txt file
 		HttpURLConnection test = null;
 		BufferedWriter writey = null;
@@ -502,7 +505,7 @@ public class Generator {
 					System.out.println(responseCode);
 					writey.write(responseCode + " " + /*card*/urls[k]);
 					writey.newLine();
-					}
+				}
 				else {
 					//Note: Card url n in the array corresponds to line n+1 in the .txt file
 					System.out.println("Card url " + k + " worked");
@@ -519,5 +522,30 @@ public class Generator {
 			System.out.println("Couldn't close writey?");
 			e.printStackTrace();
 		}
+	}
+	public BufferedImage generateTest(int templateNum) {
+
+		try { 
+			template = ImageIO.read(Generator.class.getResourceAsStream("/res/templates/template"+templateNum+".png"));
+		}catch(IOException e){
+			System.out.println("Couldn't load the template you requested.");
+		}catch(IllegalArgumentException f) {
+			System.out.println("I don't even know.");
+		}
+		//create wallpaper
+		Graphics2D wally = template.createGraphics();
+		// place cards on the template
+		for( int j = 0; j < 3; j++){
+			try {
+				//load a card
+				BufferedImage cardy = ImageIO.read(Generator.class.getResourceAsStream("/res/cards/alakazam-base-set-bs-1.jpg"));
+				//draw the card
+				wally.drawImage(cardy, (24+(624*j)), 128, 600, 825, null);
+			} catch (IOException e) {
+				System.out.println("Couldn't load image");
+			}
+		}
+		wally.finalize();
+		return template;
 	}
 }

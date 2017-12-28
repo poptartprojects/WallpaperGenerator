@@ -43,7 +43,7 @@ public class Main extends Application {
 				File output = fChoosey.showSaveDialog(primaryStage);
 				if(output!=null) {
 					try {
-						ImageIO.write(wallpaper,fChoosey.getSelectedExtensionFilter().getDescription(), output);
+						ImageIO.write(wallpaper, fChoosey.getSelectedExtensionFilter().getDescription(), output);
 					} catch (IOException e) {
 						System.out.println("Couldn't save your file!");
 					}
@@ -71,20 +71,47 @@ public class Main extends Application {
 			}
 
 		});
-		Button t = new Button();
-		t.setText("Test");
-		t.setOnAction(new EventHandler<ActionEvent>(){
+		Button ut = new Button();
+		ut.setText("URL Test");
+		ut.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent arg0) {
 				//Generate an image and show save button
-				//range: 0 to 9809
-				generator.test(0, 9809);
+				//range: 0 to 9809 12/27/17
+				generator.urlTest(0, 9809);
 			}
 		});
 
+		Button gt = new Button();
+		gt.setText("Generator Test");
+		gt.setOnAction(new EventHandler<ActionEvent>(){
+			@Override
+			public void handle(ActionEvent arg0) {
+				//Generate a wallpaper using a template and cards saved in the resource directory
+				wallpaper = generator.generateTest(1);
+				//Display everything else
+				root.setRight(fc);
+				WritableImage test = null;
+				test = SwingFXUtils.toFXImage(wallpaper, test);
+				ImageView viewy = new ImageView();
+				viewy.setFitHeight(540);
+				viewy.setFitWidth(960);
+				viewy.setImage(test);
+				root.setBottom(viewy);
+			}
+		});
+		Button back = new Button();
+		back.setText("<-");
+		back.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				//Swap scenes 
+			}
+		});
 		root.setLeft(g);
-		root.setCenter(t);
-		Scene prefs = new Scene(root,400,400);
+		root.setCenter(ut);
+		root.setBottom(gt);
+		Scene prefs = new Scene(root,600,600);
 		prefs.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		primaryStage.setScene(prefs);
 		primaryStage.show();
